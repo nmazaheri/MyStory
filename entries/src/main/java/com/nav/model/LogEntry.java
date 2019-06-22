@@ -2,7 +2,6 @@ package com.nav.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 public class LogEntry implements Serializable {
 
@@ -11,8 +10,8 @@ public class LogEntry implements Serializable {
     private String title;
     private String body;
 
-    public LogEntry(String title, String body) {
-        this.id = UUID.randomUUID().toString();
+    public LogEntry(String id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
         created = new Date();

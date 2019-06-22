@@ -4,6 +4,7 @@ import com.nav.model.LogEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Stack;
@@ -13,21 +14,27 @@ public class EntryManager {
 
     @Autowired
     private FileManager fileManager;
-
     private Stack<LogEntry> deleted = new Stack<>();
     private Map<String, LogEntry> map;
 
-    public EntryManager() {
+    @PostConstruct
+    public void init() {
         map = fileManager.loadFile();
     }
 
     public Collection<LogEntry> getMessages() {
-//        LogEntry logEntry = new LogEntry("my first day", "test");
-//        map.put(logEntry.getId(), logEntry);
         return getValues();
     }
 
-    public void addMessage(LogEntry logEntry) {
+    public LogEntry getMessage(String id) {
+        return map.get(id);
+    }
+
+    public void addMessage(LogEntry logEntry, boolean allowOverwrite) {
+        String key = logEntry.getId();
+        if (allowOverwrite && map.containsKey(key)) {
+            deleteMessage(key);
+        }
         map.put(logEntry.getId(), logEntry);
         fileManager.saveFile(getValues());
     }
@@ -40,7 +47,7 @@ public class EntryManager {
         if (deleted.isEmpty()) {
             return;
         }
-        addMessage(deleted.pop());
+        addMessage(deleted.pop(), false);
     }
 
     public void deleteMessage(String id) {

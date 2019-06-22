@@ -14,24 +14,24 @@
     <tr>
         <th>Title</th>
         <th>Message</th>
-        <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="entry : ${logEntries}">
-        <td th:text="${entry.title}"/>
+        <td><a th:text="${entry.title}" th:href="@{'/retrieve/' + ${entry.id}}">Edit</a></td>
         <td th:text="${entry.body}"/>
-        <td><a th:href="@{'/delete/' + ${entry.id}}">Delete</a></td>
+        <td><a th:href="@{'/delete/' + ${entry.id}}">(X)</a></td>
     </tr>
     </tbody>
 </table>
 
 <h4>New Entry</h4>
 
-<form action="#" th:action="@{/add}" th:object="${lastEntry}" method="post">
+<form action="#" th:action="@{/add}" th:object="${entry}" method="post">
     <p>Title: <input type="text" th:field="*{title}"/></p>
     <p>Message: <input type="text" th:field="*{body}"/></p>
+    <input type="text" hidden="true" th:field="*{id}"/>
     <p><input type="submit" value="Submit"/></p>
 </form>
 </body>
