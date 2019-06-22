@@ -3,10 +3,12 @@ package com.nav.model;
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("WeakerAccess")
 public class LogEntry implements Serializable {
 
     private String id;
     private Date created;
+    private Date updated;
     private String title;
     private String body;
 
@@ -15,6 +17,29 @@ public class LogEntry implements Serializable {
         this.title = title;
         this.body = body;
         created = new Date();
+        updated = new Date();
+    }
+
+    public void update(LogEntry logEntry) {
+        setBody(logEntry.getBody());
+        setTitle(logEntry.getTitle());
+        updated = new Date();
+    }
+
+    public static LogEntry clone(LogEntry logEntry) {
+        LogEntry clone = new LogEntry(logEntry.getId(), logEntry.getTitle(), logEntry.getBody());
+        clone.setCreated(logEntry.getCreated());
+        clone.setUpdated(logEntry.getUpdated());
+        return clone;
+    }
+
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
     public Date getCreated() {
@@ -27,6 +52,10 @@ public class LogEntry implements Serializable {
 
     public String getBody() {
         return body;
+    }
+
+    public Date getUpdated() {
+        return updated;
     }
 
     public void setTitle(String title) {

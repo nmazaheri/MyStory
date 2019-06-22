@@ -8,12 +8,14 @@
 </head>
 <body>
 <h4>Your Entries</h4>
-<p></p><a th:href="@{/undoDelete/}">Undo</a></p>
+
 <table>
     <thead>
     <tr>
         <th>Title</th>
         <th>Message</th>
+        <th>Created</th>
+        <th>Last Updated</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -21,6 +23,8 @@
     <tr th:each="entry : ${logEntries}">
         <td><a th:text="${entry.title}" th:href="@{'/retrieve/' + ${entry.id}}">Edit</a></td>
         <td th:text="${entry.body}"/>
+        <td th:text="${entry.created}"/>
+        <td th:text="${entry.updated}"/>
         <td><a th:href="@{'/delete/' + ${entry.id}}">(X)</a></td>
     </tr>
     </tbody>
@@ -32,7 +36,8 @@
     <p>Title: <input type="text" th:field="*{title}"/></p>
     <p>Message: <input type="text" th:field="*{body}"/></p>
     <input type="text" hidden="true" th:field="*{id}"/>
-    <p><input type="submit" value="Submit"/></p>
+    <input type="submit" value="Submit"/>
+    <a type="submit" th:href="@{/undoDelete/}">Undo</a>
 </form>
 </body>
 </html>
