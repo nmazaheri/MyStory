@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="ISO-8859-1"/>
     <link href="css/styles.css" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Spring Boot Application</title>
 </head>
 <body>
 <h4>Your Entries</h4>
+<p></p><a th:href="@{/undoDelete/}">Undo</a></p>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Message</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${logEntries}">
+        <td th:text="${entry.title}"/>
+        <td th:text="${entry.body}"/>
+        <td><a th:href="@{'/delete/' + ${entry.id}}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<h4>New Entry</h4>
+
+<form action="#" th:action="@{/add}" th:object="${lastEntry}" method="post">
+    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>Message: <input type="text" th:field="*{body}"/></p>
+    <p><input type="submit" value="Submit"/></p>
+</form>
 </body>
 </html>
