@@ -35,7 +35,7 @@
 <form action="#" th:action="@{/add}" th:object="${entry}" method="post">
     <p>Title: <input type="text" th:field="*{title}"/></p>
     <p>Message: <input type="text" th:field="*{body}"/></p>
-    <input type="text" hidden="true" th:field="*{id}"/>
+    <input type="text" hidden="hidden" th:field="*{id}"/>
     <input type="submit" value="Submit"/>
     <a type="submit" th:href="@{/undoDelete/}">Undo</a>
 </form>

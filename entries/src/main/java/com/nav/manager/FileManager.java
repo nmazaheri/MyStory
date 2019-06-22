@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class FileManager {
 
-    public static final String FILENAME = "story.dat";
+    private static final String FILENAME = "story.dat";
 
     public Map<String, LogEntry> loadFile() {
         return readObject().stream().collect(Collectors.toMap(LogEntry::getId, entry -> entry, (a, b) -> b, LinkedHashMap::new));

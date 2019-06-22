@@ -14,7 +14,7 @@ public class EntryManager {
 
     @Autowired
     private FileManager fileManager;
-    private Stack<LogEntry> deleted = new Stack<>();
+    private final Stack<LogEntry> deleted = new Stack<>();
     private Map<String, LogEntry> map;
 
     @PostConstruct

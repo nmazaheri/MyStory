@@ -6,7 +6,7 @@ import java.util.Date;
 @SuppressWarnings("WeakerAccess")
 public class LogEntry implements Serializable {
 
-    private String id;
+    private final String id;
     private Date created;
     private Date updated;
     private String title;
