@@ -1,4 +1,4 @@
-package com.nav.model;
+package logbook.model;
 
 import java.io.Serializable;
 import java.util.Date;

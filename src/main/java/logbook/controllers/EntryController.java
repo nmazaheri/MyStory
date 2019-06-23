@@ -1,8 +1,8 @@
-package com.nav.controllers;
+package logbook.controllers;
 
-import com.nav.manager.EntryManager;
-import com.nav.manager.FileManager;
-import com.nav.model.LogEntry;
+import logbook.manager.EntryManager;
+import logbook.manager.FileManager;
+import logbook.model.LogEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

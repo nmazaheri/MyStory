@@ -1,6 +1,6 @@
-package com.nav.manager;
+package logbook.manager;
 
-import com.nav.model.LogEntry;
+import logbook.model.LogEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
