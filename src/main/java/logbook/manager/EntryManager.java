@@ -30,14 +30,18 @@ public class EntryManager {
         return map.get(id);
     }
 
-    public void addMessage(LogEntry logEntry, boolean allowOverwrite) {
-        String key = logEntry.getId();
+    public void addMessage(LogEntry currentEntry, boolean allowOverwrite) {
+        if (currentEntry.isEmpty()) {
+            // skipping
+            return;
+        }
+        String key = currentEntry.getId();
         if (allowOverwrite && map.containsKey(key)) {
             LogEntry oldEntry = deleteMessage(key);
-            oldEntry.update(logEntry);
-            logEntry = oldEntry;
+            oldEntry.update(currentEntry);
+            currentEntry = oldEntry;
         }
-        map.put(logEntry.getId(), logEntry);
+        map.put(currentEntry.getId(), currentEntry);
         fileManager.saveFile(getValues());
     }
 
@@ -56,9 +60,8 @@ public class EntryManager {
         if (!map.containsKey(id)) {
             return null;
         }
-        LogEntry entry = map.get(id);
+        LogEntry entry = map.remove(id);
         deleted.add(entry);
-        map.remove(id);
         fileManager.saveFile(getValues());
         return LogEntry.clone(entry);
     }

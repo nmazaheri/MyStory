@@ -1,5 +1,7 @@
 package logbook.model;
 
+import org.thymeleaf.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -68,5 +70,9 @@ public class LogEntry implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public boolean isEmpty() {
+        return StringUtils.isEmpty(body) && StringUtils.isEmpty(title);
     }
 }
