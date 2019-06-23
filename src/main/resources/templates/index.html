@@ -4,9 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Logbook</title>
 
-    <link href="css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href="css/styles.css" type="text/css" rel="stylesheet"/>
 
     <script src="js/scripts.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
@@ -15,10 +15,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
+<!--navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Secure Logbook <i class="icon ion-md-heart"></i></a>
     <i class="icon ion-md-heart"></i>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse ml-5" id="navbarColor03">
@@ -37,67 +39,62 @@
 </nav>
 
 <div class="container p-4">
-    <h2 class="page-header">Your Entries</h2>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Title</th>
-            <th>Message</th>
-            <th>Created</th>
-            <th>Last Updated</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="entry : ${logEntries}">
-            <th scope="row" th:text="${entry.title}" />
-            <td><a th:href="@{'/retrieve/' + ${entry.id}}">View</a></td>
-            <td th:text="${entry.created}"/>
-            <td th:text="${entry.updated}"/>
-            <td><a th:href="@{'/delete/' + ${entry.id}}" class="icon ion-md-trash" /></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-xs-4 col-md-2">
-                <a th:href="@{/undoDelete/}">
-                    <button class="btn btn-warning btn-block">Undo</button>
-                </a>
+    <div class="row justify-content-md-center">
+        <div class="col">
+            <!--Your List -->
+            <h2 class="page-header">Your Entries</h2>
+            <table bgcolor="white" class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Created</th>
+                    <th>Last Updated</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${logEntries}">
+                    <th scope="row" th:text="${entry.title}" />
+                    <td><a th:href="@{'/retrieve/' + ${entry.id}}">View</a></td>
+                    <td th:text="${entry.created}"/>
+                    <td th:text="${entry.updated}"/>
+                    <td><a th:href="@{'/delete/' + ${entry.id}}" class="icon ion-md-trash" /></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <a th:href="@{/undoDelete/}">
+                            <button class="btn btn-warning btn-block">Undo</button>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <br>
+
+            <!--Add Entry -->
+            <h2 class="page-header">Add Entry</h2>
+            <form action="#" th:action="@{/add}" th:object="${entry}" method="post">
+                <input type="text" hidden="hidden" th:field="*{id}"/>
+
+                <div class="form-group col-lg-3">
+                    <input type="text" name="title" class="form-control" th:field="*{title}" placeholder="Title"/>
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <textarea type="text" id="editor" class="form-control" th:field="*{body}" placeholder="Message"/>
+                </div>
+                <div class="form-group col-lg-2 col-md-6">
+                    <button class="btn btn-primary btn-block">Submit</button>
+<!--                    <label class="btn btn-danger btn-block" onclick="reset();">Clear</label>-->
+                </div>
+            </form>
         </div>
     </div>
-    <br>
-
-    <h2 class="page-header">Add Entry</h2>
-    <form class="form-horizontal" action="#" th:action="@{/add}" th:object="${entry}" method="post">
-        <div class="form-group">
-
-            <div class="col-md-2 navbar-align-left">
-                <input type="text" name="title" class="form-control" th:field="*{title}" placeholder="Title"/>
-            </div>
-        </div>
-        <textarea type="text" id="editor" class="form-control" th:field="*{body}" placeholder="Message"/>
-
-        <div class="form-group">
-            <div class="col-md-8">
-
-            </div>
-        </div>
-        <div class="form-group">
-<!--            <div class="col-xs-4 col-md-2">-->
-<!--                <label class="btn btn-danger btn-block" onclick="reset();">Clear</label>-->
-<!--            </div>-->
-            <div class="col-xs-4 col-md-2">
-                <button class="btn btn-success btn-block">Submit</button>
-            </div>
-        </div>
-        <input type="text" hidden="hidden" th:field="*{id}"/>
-    </form>
 </div>
 
-
-</script>
 
 <script type="text/javascript">
 ClassicEditor
