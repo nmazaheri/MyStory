@@ -4,3 +4,4 @@
  * https://www.thymeleaf.org/
  * https://getbootstrap.com
  * https://ckeditor.com
+ * https://ionicons.com/
