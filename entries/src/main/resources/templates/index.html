@@ -2,42 +2,70 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="ISO-8859-1"/>
-    <link href="css/styles.css" rel="stylesheet"/>
+    <!--    <link href="css/styles.css" rel="stylesheet"/>-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Spring Boot Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>-->
 </head>
 <body>
-<h4>Your Entries</h4>
+<div class="container">
+    <h2 class="page-header">Your Entries</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Created</th>
+            <th>Last Updated</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${logEntries}">
+            <td><a th:text="${entry.title}" th:href="@{'/retrieve/' + ${entry.id}}">Edit</a></td>
+            <td th:text="${entry.body}"/>
+            <td th:text="${entry.created}"/>
+            <td th:text="${entry.updated}"/>
+            <td><a th:href="@{'/delete/' + ${entry.id}}" class="glyphicon glyphicon-trash "/></td>
+        </tr>
+        </tbody>
+    </table>
 
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Message</th>
-        <th>Created</th>
-        <th>Last Updated</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="entry : ${logEntries}">
-        <td><a th:text="${entry.title}" th:href="@{'/retrieve/' + ${entry.id}}">Edit</a></td>
-        <td th:text="${entry.body}"/>
-        <td th:text="${entry.created}"/>
-        <td th:text="${entry.updated}"/>
-        <td><a th:href="@{'/delete/' + ${entry.id}}">(X)</a></td>
-    </tr>
-    </tbody>
-</table>
+    <h2 class="page-header">Add Entry</h2>
+    <form class="form-horizontal" action="#" th:action="@{/add}" th:object="${entry}" method="post">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-4 col-md-4">
+                    <input type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
+                </div>
+                <div class="col-xs-4 col-md-2 col-md-offset-4">
+                    <a th:href="@{/undoDelete/}">
+                        <button class="btn btn-warning btn-block">Undo</button>
+                    </a>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                    <button class="btn btn-success btn-block">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea type="text" class="form-control" rows="10" th:field="*{body}" placeholder="Message"/>
+        </div>
+        <div class="form-group">
+            <div>
 
-<h4>New Entry</h4>
+            </div>
+        </div>
+        <input type="text" hidden="hidden" th:field="*{id}"/>
 
-<form action="#" th:action="@{/add}" th:object="${entry}" method="post">
-    <p>Title: <input type="text" th:field="*{title}"/></p>
-    <p>Message: <input type="text" th:field="*{body}"/></p>
-    <input type="text" hidden="hidden" th:field="*{id}"/>
-    <input type="submit" value="Submit"/>
-    <a type="submit" th:href="@{/undoDelete/}">Undo</a>
-</form>
+    </form>
+</div>
 </body>
 </html>
