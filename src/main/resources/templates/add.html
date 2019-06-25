@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Logbook: Edit Entry</title>
+    <th:block th:include="fragments :: assets"/>
+</head>
+<body>
+    <div th:replace="fragments :: header"/>
+    <div class="container p-4">
+        <div class="justify-content-md-center">
+                <!--Add Entry -->
+                <h2 class="page-header col-lg-3">Add Entry</h2>
+                <form action="#" th:action="@{/add}" th:object="${entry}" method="post">
+                    <input type="text" hidden="hidden" th:field="*{id}"/>
+
+                    <div class="form-group col-lg-3">
+                        <input type="text" name="title" class="form-control" th:field="*{title}"
+                               placeholder="Title"/>
+                    </div>
+
+                    <div class="form-group col-lg-8">
+                            <textarea type="text" id="editor" class="form-control" th:field="*{body}"
+                                      placeholder="Message"/>
+                    </div>
+                    <div class="form-group col-lg-2 col-md-6">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                        <!-- <label class="btn btn-danger btn-block" onclick="reset();">Clear</label>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments :: footer"/>
+
+    <script type="text/javascript">
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+        <!-- Initialize Bootstrap functionality -->
+        // Initialize tooltip component
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        // Initialize popover component
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+
+    </script>
+
+</body>
+</html>

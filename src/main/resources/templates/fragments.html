@@ -26,7 +26,7 @@
 <body>
     <div th:fragment="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Secure Logbook <i class="icon ion-md-heart"></i></a>
+            <a class="navbar-brand" href="/">Secure Logbook <i class="icon ion-md-heart"></i></a>
             <i class="icon ion-md-heart"></i>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
                     aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +35,13 @@
 
             <div class="collapse navbar-collapse ml-5" id="navbarColor03">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active m-1">
-                        <a class="nav-link" href="#">View<span class="sr-only">(current)</span></a>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}" class="nav-item m-1">
+                        <a class="nav-link" href="/">View</a>
                     </li>
-                    <li class="nav-item m-1">
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/add' ? 'active':''}" class="nav-item m-1">
                         <a class="nav-link" href="/add">Add</a>
                     </li>
-                    <li class="nav-item m-1">
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/settings' ? 'active':''}" class="nav-item m-1">
                         <a class="nav-link" href="/settings">Settings</a>
                     </li>
                 </ul>
