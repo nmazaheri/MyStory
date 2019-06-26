@@ -1,6 +1,6 @@
 # MyStory
 
-A secure web based logbook which allows you to add, remove, view and update entries.
+A web based logbook which allows you to add, remove, view and update entries. The data is encrypyed and stored locally.
 
 ## Getting Started
 
