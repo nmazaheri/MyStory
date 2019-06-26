@@ -16,13 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EntryController {
 
     public static final String REDIRECT_TO_INDEX = "redirect:/";
-    public static final String REDIRECT_TO_UPDATE = "redirect:/update";
 
     @Autowired
     private EntryManager entryManager;
-
-    @Autowired
-    private FileManager fileManager;
 
     private LogEntry entry = new LogEntry();
 
