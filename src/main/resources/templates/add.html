@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Logbook: Edit Entry</title>
+    <title>Add Entry</title>
     <th:block th:include="fragments :: assets"/>
 </head>
 <body>
@@ -10,7 +10,7 @@
     <div class="container p-4">
         <div class="justify-content-md-center">
                 <!--Add Entry -->
-                <h2 class="page-header col-lg-3">Add Entry</h2>
+                <h2 class="page-header col-lg-3 mb-3 mt-1">Add Entry</h2>
                 <form action="#" th:action="@{/add}" th:object="${entry}" method="post">
                     <input type="text" hidden="hidden" th:field="*{id}"/>
 
