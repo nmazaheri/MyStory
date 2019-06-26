@@ -8,10 +8,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Screenshots
 
-<br><img src="src/main/resources/view.PNG" width="750"/>   
+<img src="src/main/resources/view.PNG" width="750"/><br>
 <b>Viewing logbook</b>
-
-<br><img src="src/main/resources/add.PNG" width="750"/>
+<br>
+<br><img src="src/main/resources/add.PNG" width="750"/><br>
 <b>Adding a record</b>
 
 ## Deployment
